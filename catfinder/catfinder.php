@@ -9,14 +9,22 @@ Author URI: mailto:mixailo@mixailo.org
 License: CC-BY-SA
 
 */
-define("WP_CATFINDER_VERSION", "0.0.1");
 
+function catfinder_bootstrap() {
+    global $wpdb;
 
-function catfinder_install() {
-	global $wpdb;
-	// create db structure
+    define("WP_CATFINDER_VERSION", "0.0.1");
+    define('WP_CATFINDER_FOLDER', dirname(plugin_basename(__FILE__)));
 
-	add_option("catfinder_db_version", WP_CATFINDER_VERSION);
+    // add database pointers
+    $wpdb->cf_pets = $wpdb->prefix . 'cf_pets';
+    $wpdb->cf_images = $wpdb->prefix . 'cf_images';
+
+    // Load includes
+    require_once (dirname(__FILE__) . "/catfinder_install.php");
+    require_once (dirname(__FILE__) . "/catfinder_functions.php");
+
 }
 
+catfinder_bootstrap();
 register_activation_hook(__FILE__, 'catfinder_install');
