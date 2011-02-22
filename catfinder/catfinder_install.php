@@ -8,7 +8,7 @@
 function catfinder_install() {
 	global $wpdb;
 	// create db structure
-    $wq_query = "CREATE TABLE `helpacat_wp`.`wp_cf_pets` (
+    $wq_query = "CREATE TABLE {$wpdb->cf_pets} (
     `id` INT NOT NULL AUTO_INCREMENT ,
     `pet_name` VARCHAR( 64 ) NOT NULL ,
     `pet_description` TEXT NOT NULL ,
